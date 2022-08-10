@@ -9,11 +9,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf ./dist && rollup -c",
-    "dev": "rm -rf ./dist && concurrently \"rollup -c -w\" \"cd ./example && npm dev\"",
+    "dev": "rm -rf ./dist && concurrently \"rollup -c -w\" \"cd ./example && yarn dev\"",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\" \"./example/**/*.{ts,tsx,js,jsx,html}\"",
     "test": "jest",
     "publish": "npm publish --access public",
-    "prepare": "npm run build"
+    "prepare": "yarn build"
   },
   "peerDependencies": {
     "react": ">=16",
