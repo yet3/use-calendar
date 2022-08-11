@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "yet3",
   "license": "MIT",
-  "description": "React hook useful for creating calendars",
+  "description": "React hook that makes creating calendars easier",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
