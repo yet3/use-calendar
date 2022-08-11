@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Locale } from 'date-fns';
 
 export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
-
+export type Unit = 'days' | 'months' | 'years' | 'weeks';
 type FormatFunc = (pattern?: string, options?: FormatOptions) => string;
 
 export interface UseCalendarOptions {
@@ -35,7 +35,6 @@ export interface IUseCalendar {
   resetOptions(): void;
 }
 
-export type Unit = 'days' | 'months' | 'years' | 'weeks';
 
 export interface FormatOptions {
   locale?: Locale;
