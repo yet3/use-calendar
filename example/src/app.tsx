@@ -1,5 +1,4 @@
 import './index.css';
-import { createRoot } from 'react-dom/client';
 import { UseCalendar, useCalendar } from '../../src';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -15,15 +14,13 @@ const App = () => {
   const [calendarStartDay, setCalendarStartDay] = useState<DayOfWeek>('monday');
   const [alwaysSixRows, setAlwaysSixRows] = useState(false);
 
-  const { calendarDate, groupedDays, daysOfWeek } = useCalendar({
+  const { calendarDate, groupedDays } = useCalendar({
     disabled,
     calendarStartDay,
     disableWeekends: disabledWeekends,
     disableWeekDays: disabledWeekDays,
     alwaysSixRows,
   });
-
-  console.log(daysOfWeek)
 
   return (
     <main className="p-4 grid gap-4">
@@ -104,5 +101,5 @@ const App = () => {
   );
 };
 
-const root = createRoot(document.getElementById('root')!);
-root.render(<App />);
+
+export {App}
