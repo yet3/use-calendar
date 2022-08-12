@@ -48,7 +48,7 @@ const MyCalendar = () => {
 
 Each `.format(pattern, options)` method accepts pattern and options, both of those arguments are optional as each format method has a default pattern.
 
-See date-fns's [format docs](https://date-fns.org/v2.29.1/docs/format) from possible patterns.
+See date-fns's [format docs](https://date-fns.org/v2.29.1/docs/format) for possible patterns.
 
 ### useCalendar
 
