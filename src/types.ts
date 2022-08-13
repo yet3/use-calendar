@@ -88,8 +88,7 @@ export interface CalendarDayOfWeek {
   format: FormatFunc;
 }
 
-export interface UseCalendarResult {
-  calendarDate: {
+export interface CalendarDate {
     date: Date;
 
     // https://date-fns.org/v2.29.1/docs/format
@@ -102,7 +101,10 @@ export interface UseCalendarResult {
     subtractMonth: () => void;
     addYear: () => void;
     subtractYear: () => void;
-  };
+}
+
+export interface UseCalendarResult {
+  calendarDate: CalendarDate
   calendarStartDate: {
     date: Date;
 

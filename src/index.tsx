@@ -9,4 +9,5 @@ export type {
   UseCalendarHookOptions,
   IUseCalendar,
   CalendarDayOfWeek,
+  CalendarDate,
 } from './types';
