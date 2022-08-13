@@ -12,7 +12,6 @@
     "dev": "rm -rf ./dist && concurrently \"rollup -c -w\" \"cd ./example && yarn dev\"",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\" \"./example/**/*.{ts,tsx,js,jsx,html}\"",
     "test": "jest",
-    "publish": "npm publish --access public",
     "prepare": "yarn build"
   },
   "peerDependencies": {
