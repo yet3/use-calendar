@@ -1,6 +1,8 @@
 # useCalendar
 
 ![GitHub license](https://img.shields.io/github/license/yet3/use-calendar?style=flat)
+<a href='https://www.npmjs.com/package/@yet3/use-calendar'>
+  ![npm](https://img.shields.io/npm/v/@yet3/use-calendar)
 
 React hook that makes creating calendars easier.
 
