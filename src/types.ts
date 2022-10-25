@@ -22,9 +22,14 @@ export interface UseCalendarOptions {
   dayOfWeekFormat?: string;
   dayFormat?: string;
   calendarDateFormat?: string;
+
+  onlyCurrentMonth?: boolean
 }
 
-export interface UseCalendarHookOptions extends UseCalendarOptions { }
+export interface UseCalendarHookOptions extends UseCalendarOptions {
+  calendarDate?: Date | null
+  setCalendarDate?: Dispatch<SetStateAction<Date>> | null;
+ }
 
 export interface IUseCalendar {
   DEFAULT_OPTIONS: Required<UseCalendarOptions>;
@@ -34,7 +39,6 @@ export interface IUseCalendar {
   setCalendarStartDay(day: DayOfWeek): void;
   resetOptions(): void;
 }
-
 
 export interface FormatOptions {
   locale?: Locale;

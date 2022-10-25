@@ -1,14 +1,20 @@
 {
   "name": "@yet3/use-calendar",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "yet3",
   "license": "MIT",
   "description": "React hook that makes creating calendars easier",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "size-limit": [
+    {
+      "path": "dist/*.js",
+      "import": "{ createComponent }"
+    }
+  ],
   "scripts": {
-    "build": "rm -rf ./dist && rollup -c",
+    "build": "rm -rf ./dist && rollup -c && size-limit",
     "dev": "rm -rf ./dist && concurrently \"rollup -c -w\" \"cd ./example && yarn dev\"",
     "format": "prettier --write \"./src/**/*.{ts,tsx,js,jsx}\" \"./example/**/*.{ts,tsx,js,jsx,html}\"",
     "test": "jest",
@@ -20,6 +26,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "@size-limit/esbuild": "^8.1.0",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
@@ -40,6 +47,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.32.1",
     "sass": "^1.54.0",
+    "size-limit": "^8.1.0",
     "ts-jest": "^28.0.7",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
@@ -60,5 +68,8 @@
   "bugs": {
     "url": "https://github.com/yet3/use-calendar/issues"
   },
-  "homepage": "https://github.com/yet3/use-calendar#readme"
+  "homepage": "https://github.com/yet3/use-calendar#readme",
+  "dependencies": {
+    "@size-limit/file": "^8.1.0"
+  }
 }

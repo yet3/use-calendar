@@ -13,6 +13,7 @@ React hook that makes creating calendars easier.
 - [Usage](#quick-usage)
   - [Quick](#quick-usage)
   - [Full example](#full-example)
+  - [Controlled calendar date example](#controlled-calendar-date-example)
 - [.format()](#format)
 - [useCalendar](#usecalendar-1)
 - [UseCalendar](#usecalendar-2)
@@ -107,6 +108,8 @@ UseCalendar.setLocale(fr);
 Options can be set by passing them to `useCalendar(Options)` hook or by setting them using `UseCalendar.setOptions(Options)`
 
 - defaultDate?: Date | null | false - date with which calendar will be initialized
+- calendarDate?: Date | null - controlled calendar date (can only be passed in hook)
+- setCalendarDate?: Dispatch<SetStateAction<Date>> | null - setter for controlled date (can only be passed in hook)
 - calendarStartDay?: [DayOfWeek](#types) - day at which calendar will start
 - disabled?: boolean - whether calendar is disabled
 - disableWeekDays?: boolean - whether week days are disabled
@@ -116,6 +119,7 @@ Options can be set by passing them to `useCalendar(Options)` hook or by setting 
 - dayOfWeekFormat?: string - format pattern of each day of the week (monday...sunday);
 - dayFormat?: string - format pattern of each of the days in calendar
 - calendarDateFormat?: string - format pattern of calendars date
+- onlyCurrentMonth?: boolean - if true `days` and `groupedDays` will only contain days of current calendar date (option `alwaysSixRows` will be ignored)
 
 ### CalendarDay
 
@@ -152,8 +156,8 @@ Options can be set by passing them to `useCalendar(Options)` hook or by setting 
   - date: Date
   - format: [FormatFunc](#types)
 
-### Full example
 
+### Full example
 ```tsx
 import { useCalendar, UseCalendar } from '@yet3/use-calendar';
 
@@ -227,6 +231,37 @@ const MyCalendar = () => {
     </div>
   );
 };
+```
+
+### Controlled calendar date example
+```tsx
+import { SetStateActions, useState } from 'react';
+import { useCalendar, UseCalendar } from '@yet3/use-calendar';
+
+const MyComponent = () => {
+  const [date, setDate] = useState<Date>(new Date())
+
+  return (
+    <div>
+      <h1>My super cool calendar</h1>
+      <MyCalendar date={date} setDate={setDate} />
+    </div>
+  )
+}
+
+interface CalendarProps {
+  date: Date
+  setDate: (value: SetSateAction<Date>) => void
+}
+
+const MyCalendar = ({ date, setDate }: CalendarProps) => {
+  const { calendarDate, days, daysOfWeek } = useCalendar({
+    calendarDate: date,
+    setCalendarDate: setDate
+  });
+
+  ...
+}
 ```
 
 ### Depends on

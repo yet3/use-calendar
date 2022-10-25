@@ -2,7 +2,7 @@ import { Locale } from 'date-fns';
 import { DayOfWeek, UseCalendarHookOptions, UseCalendarOptions } from '../types';
 import { UseCalendar } from '../UseCalendar';
 
-interface MergedOptions extends UseCalendarOptions {
+interface MergedOptions extends UseCalendarOptions, UseCalendarHookOptions {
   calendarStartDay: DayOfWeek;
   locale: Locale;
 

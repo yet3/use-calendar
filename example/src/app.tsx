@@ -14,12 +14,12 @@ const App = () => {
   const [calendarStartDay, setCalendarStartDay] = useState<DayOfWeek>('monday');
   const [alwaysSixRows, setAlwaysSixRows] = useState(false);
 
-  const { calendarDate, groupedDays } = useCalendar({
+  const { calendarDate, days, groupedDays } = useCalendar({
+    onlyCurrentMonth: true,
     disabled,
     calendarStartDay,
     disableWeekends: disabledWeekends,
     disableWeekDays: disabledWeekDays,
-    alwaysSixRows,
   });
 
   return (
@@ -42,10 +42,16 @@ const App = () => {
         <button className={disabled ? 'button-danger' : 'button'} onClick={() => setDisabled((p) => !p)}>
           {disabled ? 'Enable' : 'Disable'}
         </button>
-        <button className={disabledWeekends ? 'button-danger' : 'button'} onClick={() => setDisabledWeekends((p) => !p)}>
+        <button
+          className={disabledWeekends ? 'button-danger' : 'button'}
+          onClick={() => setDisabledWeekends((p) => !p)}
+        >
           {disabledWeekends ? 'Enable weekends' : 'Disable weekends'}
         </button>
-        <button className={disabledWeekDays ? 'button-danger' : 'button'} onClick={() => setDisabledWeekDays((p) => !p)}>
+        <button
+          className={disabledWeekDays ? 'button-danger' : 'button'}
+          onClick={() => setDisabledWeekDays((p) => !p)}
+        >
           {disabledWeekDays ? 'Enable week days' : 'Disable week days'}
         </button>
         <button className="button" onClick={() => setAlwaysSixRows((p) => !p)}>
@@ -69,37 +75,49 @@ const App = () => {
             {'>>'}
           </button>
         </div>
-        <ol className="list-none grid grid-flow-col justify-center mt-2">
-          {groupedDays.map((group) => (
-            <li key={group.key} className="w-10 h-8 grid place-items-center">
-              <span className="font-bold">{group.format()}</span>
-              <ol className="list-none grid">
-                {group.days.map((day) => (
-                  <li key={day.key} className={clsx('w-8 h-8')}>
-                    <button
-                      className={clsx(
-                        'w-full h-full rounded-full  grid place-items-center disabled:text-gray-300 disabled:hover:bg-transparent',
-                        selectedDate.getTime() == day.date.getTime() ? 'bg-green-300' : 'hover:bg-green-100',
-                        !day.isCurrentMonth ? 'text-gray-500' : 'text-black'
-                      )}
-                      disabled={day.isDisabled}
-                      onClick={() => {
-                        if (!day.isCurrentMonth) calendarDate.set(day.date);
-                        setSelectedDate(day.date);
-                      }}
-                    >
-                      {day.format()}
-                    </button>
-                  </li>
-                ))}
-              </ol>
+
+        <ol className="list-none grid grid-cols-[repeat(7,auto)] place-content-center place-items-center  mt-2">
+          {days.map((d) => (
+            <li
+              key={d.key}
+              className="w-8 h-8 grid place-items-center"
+              style={{ color: d.isCurrentMonth ? 'black' : 'red' }}
+            >
+              {d.format()}
             </li>
           ))}
         </ol>
+
+        {/* <ol className="list-none grid grid-flow-col justify-center mt-2"> */}
+        {/*   {groupedDays.map((group) => ( */}
+        {/*     <li key={group.key} className="w-10 h-8 grid place-items-center"> */}
+        {/*       <span className="font-bold">{group.format()}</span> */}
+        {/*       <ol className="list-none grid"> */}
+        {/*         {group.days.map((day) => ( */}
+        {/*           <li key={day.key} className={clsx('w-8 h-8')}> */}
+        {/*             <button */}
+        {/*               className={clsx( */}
+        {/*                 'w-full h-full rounded-full  grid place-items-center disabled:text-gray-300 disabled:hover:bg-transparent', */}
+        {/*                 selectedDate.getTime() == day.date.getTime() ? 'bg-green-300' : 'hover:bg-green-100', */}
+        {/*                 !day.isCurrentMonth ? 'text-gray-500' : 'text-black' */}
+        {/*               )} */}
+        {/*               disabled={day.isDisabled} */}
+        {/*               onClick={() => { */}
+        {/*                 if (!day.isCurrentMonth) calendarDate.set(day.date); */}
+        {/*                 setSelectedDate(day.date); */}
+        {/*               }} */}
+        {/*             > */}
+        {/*               {day.format()} */}
+        {/*             </button> */}
+        {/*           </li> */}
+        {/*         ))} */}
+        {/*       </ol> */}
+        {/*     </li> */}
+        {/*   ))} */}
+        {/* </ol> */}
       </section>
     </main>
   );
 };
 
-
-export {App}
+export { App };

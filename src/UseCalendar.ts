@@ -19,6 +19,7 @@ UseCalendar.DEFAULT_OPTIONS = {
   dayFormat: 'dd',
   dayOfWeekFormat: 'EEEEEE',
   calendarDateFormat: 'MM-yyyy',
+  onlyCurrentMonth: false,
 };
 
 UseCalendar.options = { ...UseCalendar.DEFAULT_OPTIONS };
