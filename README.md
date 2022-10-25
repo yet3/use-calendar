@@ -105,6 +105,8 @@ UseCalendar.setLocale(fr);
 Options can be set by passing them to `useCalendar(Options)` hook or by setting them using `UseCalendar.setOptions(Options)`
 
 - defaultDate?: Date | null | false - date with which calendar will be initialized
+- calendarDate?: Date | null - controlled calendar date (can only be passed in hook)
+- setCalendarDate?: Dispatch<SetStateAction<Date>> | null - setter for controlled date (can only be passed in hook)
 - calendarStartDay?: [DayOfWeek](#types) - day at which calendar will start
 - disabled?: boolean - whether calendar is disabled
 - disableWeekDays?: boolean - whether week days are disabled
@@ -114,6 +116,7 @@ Options can be set by passing them to `useCalendar(Options)` hook or by setting 
 - dayOfWeekFormat?: string - format pattern of each day of the week (monday...sunday);
 - dayFormat?: string - format pattern of each of the days in calendar
 - calendarDateFormat?: string - format pattern of calendars date
+- onlyCurrentMonth?: boolean - if true `days` and `groupedDays` will only contain days of current calendar date (option `alwaysSixRows` will be ignored)
 
 ### CalendarDay
 
@@ -238,7 +241,7 @@ const MyComponent = () => {
   return (
     <div>
       <h1>My super cool calendar</h1>
-      <MyCalendar />
+      <MyCalendar date={date} setDate={setDate} />
     </div>
   )
 }

@@ -22,6 +22,8 @@ export interface UseCalendarOptions {
   dayOfWeekFormat?: string;
   dayFormat?: string;
   calendarDateFormat?: string;
+
+  onlyCurrentMonth?: boolean
 }
 
 export interface UseCalendarHookOptions extends UseCalendarOptions {

@@ -1,4 +1,4 @@
-import { add, startOfMonth, format, getWeek, getISOWeek } from 'date-fns';
+import { add, startOfMonth, format, getWeek, getISOWeek, getDaysInMonth } from 'date-fns';
 import { useState, useMemo } from 'react';
 import {
   CalendarDay,
@@ -24,6 +24,7 @@ const useCalendar = (hOptions: UseCalendarHookOptions = {}): UseCalendarResult =
     locale,
     dayFormat,
     dayOfWeekFormat,
+    onlyCurrentMonth,
     calendarDateFormat,
     calendarDate: controlledDate,
     setCalendarDate: setControlledDate,
@@ -50,16 +51,21 @@ const useCalendar = (hOptions: UseCalendarHookOptions = {}): UseCalendarResult =
     const days: CalendarDay[] = [];
     const monthStartDate = startOfMonth(selectedDate);
     const firstDay = monthStartDate.getDay();
-    let amtOfDaysInCurrentMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 0).getDate();
+    let amtOfDaysInCurrentMonth = getDaysInMonth(monthStartDate);
 
     let loopStartIndex: number;
-    if (firstDay === calendarStartDayDate) loopStartIndex = 0;
-    else if (firstDay > calendarStartDayDate) loopStartIndex = -(firstDay - calendarStartDayDate);
-    else loopStartIndex = -(7 - calendarStartDayDate + firstDay);
-
     let amtOfDays;
-    if (alwaysSixRows) amtOfDays = 6 * 7;
-    else amtOfDays = Math.ceil((Math.abs(loopStartIndex) + amtOfDaysInCurrentMonth) / 7) * 7;
+    if (!onlyCurrentMonth) {
+      if (firstDay === calendarStartDayDate) loopStartIndex = 0;
+      else if (firstDay > calendarStartDayDate) loopStartIndex = -(firstDay - calendarStartDayDate);
+      else loopStartIndex = -(7 - calendarStartDayDate + firstDay);
+
+      if (alwaysSixRows && !onlyCurrentMonth) amtOfDays = 6 * 7;
+      else amtOfDays = Math.ceil((Math.abs(loopStartIndex) + amtOfDaysInCurrentMonth) / 7) * 7;
+    } else {
+      loopStartIndex = 0;
+      amtOfDays = amtOfDaysInCurrentMonth;
+    }
 
     const iterations = amtOfDays + loopStartIndex;
     for (let i = loopStartIndex; i < iterations; i++) {
@@ -101,9 +107,11 @@ const useCalendar = (hOptions: UseCalendarHookOptions = {}): UseCalendarResult =
     disableWeekDays,
     disableWeekends,
     alwaysSixRows,
+    onlyCurrentMonth,
   ]);
 
   const groupedDays = useMemo((): CalendarGroup[] => {
+    console.log('HAS GENERATED GROUPED DAYS');
     const groups: CalendarGroup[] = [];
 
     let prevDayOfWeek = -1;
@@ -130,19 +138,8 @@ const useCalendar = (hOptions: UseCalendarHookOptions = {}): UseCalendarResult =
         } else groups[groups.length - 1].days.push(day);
       });
 
-
     return groups.sort((a, b) => sortByDayOfWeek(a, b, calendarStartDayDate));
-  }, [
-    selectedDate,
-    calendarStartDay,
-    disabled,
-    locale?.code,
-    dayOfWeekFormat,
-    dayFormat,
-    disableWeekDays,
-    disableWeekends,
-    alwaysSixRows,
-  ]);
+  }, [days]);
 
   return {
     calendarDate: {
