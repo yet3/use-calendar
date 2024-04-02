@@ -111,7 +111,6 @@ const useCalendar = (hOptions: UseCalendarHookOptions = {}): UseCalendarResult =
   ]);
 
   const groupedDays = useMemo((): CalendarGroup[] => {
-    console.log('HAS GENERATED GROUPED DAYS');
     const groups: CalendarGroup[] = [];
 
     let prevDayOfWeek = -1;
